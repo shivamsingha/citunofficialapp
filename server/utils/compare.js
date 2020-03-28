@@ -11,7 +11,7 @@ async function compare() {
       if (oldResult.toString() != newResultString) {
         console.log("result changed. writing to json file")
         try {
-          await fs.writeFile("result.json", newResultString);
+          await fs.writeFile("../result.json", newResultString);
         } catch (e) {
           console("fs.writeFile error");
           console.log(e);
