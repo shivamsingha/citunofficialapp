@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "refreshData": "node utils/compare.js",
+    "start": "node index.js",
+    "lint": "eslint .",
+    "lint-fix": "eslint --fix ."
+  },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",

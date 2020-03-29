@@ -3,7 +3,7 @@ const rp = require('request-promise-native');
 const url = 'https://cit.ac.in/';
 
 async function scraper() {
-  result = {
+  const result = {
     notices: [],
     newsevents: [],
     tenders: [],
@@ -15,10 +15,19 @@ async function scraper() {
     const html = await rp(url);
     let n = 1;
     for (const property in result) {
-      let out = new Array();
-      const ax = $(`#noticeContainer>.noticeContent:nth-child(${n})>div>div:nth-child(2)>a`, html);
-      const text = $(`#noticeContainer>.noticeContent:nth-child(${n})>div>div:nth-child(2)>a>span`, html);
-      const date = $(`#noticeContainer>.noticeContent:nth-child(${n})>div>div:nth-child(2)>span`, html);
+      const out = new Array();
+      const ax = $(
+        `#noticeContainer>.noticeContent:nth-child(${n})>div>div:nth-child(2)>a`,
+        html
+      );
+      const text = $(
+        `#noticeContainer>.noticeContent:nth-child(${n})>div>div:nth-child(2)>a>span`,
+        html
+      );
+      const date = $(
+        `#noticeContainer>.noticeContent:nth-child(${n})>div>div:nth-child(2)>span`,
+        html
+      );
       n++;
       for (let i = 0; i < ax.length; ++i) {
         out.push({
@@ -37,7 +46,7 @@ async function scraper() {
         title: $(ax[i]).text()
       });
     }
-    result['happenings'] = out;
+    result.happenings = out;
 
     out = new Array();
     ax = $('marquee a', html);
@@ -47,12 +56,12 @@ async function scraper() {
         title: $(ax[i]).text()
       });
     }
-    result['topinfo'] = out;
+    result.topinfo = out;
 
     return result;
   } catch (e) {
-  console.log(e)
-}
+    console.log(e);
+  }
 }
 
-module.exports = scraper
+module.exports = scraper;
