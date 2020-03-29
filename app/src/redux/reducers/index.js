@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux';
 import fetch from './fetch';
 
-export default combineReducers({ malloc });
+export default combineReducers({ fetch });
