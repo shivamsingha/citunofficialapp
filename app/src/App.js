@@ -8,28 +8,14 @@
 
 import 'react-native-gesture-handler';
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions
-} from 'react-native/Libraries/NewAppScreen';
+import { StyleSheet } from 'react-native';
+import { LearnMoreLinks, Colors } from 'react-native/Libraries/NewAppScreen';
 import Notices from './Screens/Notices';
-import One from './1';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { TransitionSpecs } from '@react-navigation/stack';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './redux';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -39,12 +25,16 @@ enableScreens();
 
 const App: () => React$Node = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="one" component={Notices} />
-        <Tab.Screen name="two" component={LearnMoreLinks} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen name="one" component={Notices} />
+            <Tab.Screen name="two" component={LearnMoreLinks} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
 };
 
