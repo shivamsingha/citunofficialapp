@@ -11,32 +11,31 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { LearnMoreLinks, Colors } from 'react-native/Libraries/NewAppScreen';
 import Notices from './Screens/Notices';
+import { enableScreens } from 'react-native-screens';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux';
 
-const Tab = createMaterialBottomTabNavigator();
-
-import { enableScreens } from 'react-native-screens';
-
 enableScreens();
 
-const App: () => React$Node = () => {
-  return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <NavigationContainer>
-          <Tab.Navigator>
-            <Tab.Screen name="one" component={Notices} />
-            <Tab.Screen name="two" component={LearnMoreLinks} />
-          </Tab.Navigator>
-        </NavigationContainer>
-      </PersistGate>
-    </Provider>
-  );
-};
+const Tab = createMaterialBottomTabNavigator();
+
+const App: () => React$Node = () => (
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Notices" component={Notices} />
+          <Tab.Screen name="News" component={LearnMoreLinks} />
+          <Tab.Screen name="Tenders" component={LearnMoreLinks} />
+          <Tab.Screen name="Happenings" component={LearnMoreLinks} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </PersistGate>
+  </Provider>
+);
 
 const styles = StyleSheet.create({
   scrollView: {

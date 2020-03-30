@@ -4,14 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "refreshData": "node utils/compare.js",
-    "start": "node index.js",
+    "refreshData": "node index.js",
     "lint": "eslint .",
     "lint-fix": "eslint --fix ."
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "express": "^4.17.1",
     "firebase-tools": "^7.16.1",
     "request": "^2.88.2",
     "request-promise-native": "^1.0.8"
