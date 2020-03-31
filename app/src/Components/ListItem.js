@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { View, Text, Linking, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Linking, StyleSheet } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 
 const ListItemContent: () => React$Node = ({

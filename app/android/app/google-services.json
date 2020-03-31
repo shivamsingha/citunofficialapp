@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "66033066656",
+    "firebase_url": "https://citunofficial.firebaseio.com",
+    "project_id": "citunofficial",
+    "storage_bucket": "citunofficial.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66033066656:android:c0bf754df01ddba56adfc5",
+        "android_client_info": {
+          "package_name": "com.citunofficial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66033066656-pumev6g63dmvlfgufhjfg35v7om7vekb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.citunofficial",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "66033066656-6ruijv70b2tpumb08a8ncu5t4tdv4u62.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjGRPC7XPSkHn3f66u66dfyXrGa_wcEn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66033066656-6ruijv70b2tpumb08a8ncu5t4tdv4u62.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
