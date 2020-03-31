@@ -1,19 +1,25 @@
 const fs = require('fs').promises;
 const scraper = require('./scraper');
+const diff = require('./diff');
 
 const filePath = `${process.env.RESULT_PATH || process.cwd()}/result.json`;
 
 async function compare() {
   let newResult,
     oldResult,
-    flag = false;
+    changeStatus = {
+      wasChanged: false
+    };
   try {
     newResult = await scraper();
     try {
       oldResult = await fs.readFile(filePath, { flag: 'a+' });
+      oldResult = JSON.parse(oldResult.toString());
+      const oldResultString = JSON.stringify(oldResult);
       const newResultString = JSON.stringify(newResult);
-      if (oldResult.toString() != newResultString) {
-        flag = true;
+      if (oldResultString != newResultString) {
+        changeStatus.wasChanged = true;
+        changeStatus.diff = diff(newResult, oldResult);
         console.log('result changed. writing to json file');
         try {
           await fs.writeFile(filePath, newResultString);
@@ -32,7 +38,7 @@ async function compare() {
     console.log('Scraper Error');
     console.log(e);
   }
-  return flag;
+  return changeStatus;
 }
 
 module.exports = compare;
