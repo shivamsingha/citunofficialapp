@@ -36,9 +36,15 @@ const App: () => React$Node = () => {
       console.log('User declined messaging permissions :(');
     }
   }
+
+  async function subscribeTopic() {
+    await messaging().subscribeToTopic('allDevices');
+  }
+
   useEffect(() => {
     registerAppWithFCM();
     requestPermission();
+    subscribeTopic();
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       console.log('FCM Message Data:', remoteMessage.data);
     });
