@@ -5,18 +5,26 @@ import { View, Text, Linking, StyleSheet } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import Icon from 'react-native-vector-icons/Octicons';
 
-const dateString=(date:string):string=>{
-  const dateLocale=new Date(date);
-  return dateLocale.toDateString()
-}
+const dateString = (date: string): string => {
+  const dateLocale = new Date(date);
+  return dateLocale.toDateString();
+};
 
-const ListItemContent = ({ title }) => (
+const ListItemContent = ({ title }: { title: string }): React$Node => (
   <View>
     <Text style={styles.title}>{title}</Text>
   </View>
 );
 
-const ListItem = ({ link, title, date }) => (
+const ListItem = ({
+  link,
+  title,
+  date
+}: {
+  link?: string,
+  title: string,
+  date?: string
+}): React$Node => (
   <View style={styles.MainContainer}>
     {link ? (
       <Touchable
@@ -29,7 +37,7 @@ const ListItem = ({ link, title, date }) => (
     )}
     {date && (
       <View style={styles.dateContainer}>
-        <Icon name="calendar" size={18} color='#555' />
+        <Icon name="calendar" size={18} color="#555" />
         <Text style={styles.dateText}>{dateString(date)}</Text>
       </View>
     )}

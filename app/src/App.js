@@ -7,17 +7,22 @@
  */
 
 import 'react-native-gesture-handler';
+
 import React, { useEffect } from 'react';
 import { LearnMoreLinks } from 'react-native/Libraries/NewAppScreen';
-import Notices from './Screens/Notices';
-import { enableScreens } from 'react-native-screens';
+
 import { NavigationContainer } from '@react-navigation/native';
+import { enableScreens } from 'react-native-screens';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import Icon from 'react-native-vector-icons/AntDesign';
+
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './redux';
+
 import messaging from '@react-native-firebase/messaging';
-import Icon from 'react-native-vector-icons/AntDesign';
+
+import { Notices } from './Screens';
+import { store, persistor } from './redux';
 
 enableScreens();
 
