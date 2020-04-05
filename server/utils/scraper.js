@@ -30,10 +30,15 @@ async function scraper() {
       );
       n++;
       for (let i = 0; i < ax.length; ++i) {
+        const dateSplits = $(date[i])
+          .text()
+          .replace('Published ', '')
+          .split(' ')
+          .reverse();
         out.push({
           link: $(ax[i]).attr('href'),
           title: $(text[i]).text(),
-          date: $(date[i]).text()
+          date: new Date(...dateSplits)
         });
       }
       result[property] = out;
