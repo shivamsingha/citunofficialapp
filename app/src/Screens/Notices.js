@@ -8,10 +8,10 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchData } from '../redux/actions';
 import { SafeAreaView, StyleSheet, View, StatusBar } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { ListItem } from '../Components';
+import { fetchData } from '../redux/actions';
 import { relativeHeight } from '../utils';
 
 const { Value, interpolate, Extrapolate, set } = Animated;
@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
     zIndex: 10
   },
   body: {
-    backgroundColor: 'rgba(255, 255, 255, 1.0)'
+    backgroundColor: 'rgba(255, 255, 255, 1.0)',
+    paddingBottom: 300
   },
   headerBackground: {
     height: relativeHeight(30),
@@ -123,6 +124,6 @@ const styles = StyleSheet.create({
 });
 
 export default connect(
-  state => state.fetchedData,
+  state => ({ ...state.fetchedData }),
   { fetchData }
 )(Notices);

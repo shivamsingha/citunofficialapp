@@ -3,30 +3,21 @@
 import React from 'react';
 import { View, Text, Linking, StyleSheet } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
+import Icon from 'react-native-vector-icons/Octicons';
 
-const ListItemContent: () => React$Node = ({
-  title,
-  date
-}: {
-  title: string,
-  date: string
-}) => (
+const dateString=(date:string):string=>{
+  const dateLocale=new Date(date);
+  return dateLocale.toDateString()
+}
+
+const ListItemContent = ({ title }) => (
   <View>
-    <Text>{title}</Text>
-    {date && <Text>{date}</Text>}
+    <Text style={styles.title}>{title}</Text>
   </View>
 );
 
-const ListItem: () => React$Node = ({
-  link,
-  title,
-  date
-}: {
-  link: string,
-  title: string,
-  date: string
-}) => (
-  <View>
+const ListItem = ({ link, title, date }) => (
+  <View style={styles.MainContainer}>
     {link ? (
       <Touchable
         onPress={() => Linking.openURL(link)}
@@ -36,16 +27,37 @@ const ListItem: () => React$Node = ({
     ) : (
       <ListItemContent title={title} date={date} />
     )}
+    {date && (
+      <View style={styles.dateContainer}>
+        <Icon name="calendar" size={18} color='#555' />
+        <Text style={styles.dateText}>{dateString(date)}</Text>
+      </View>
+    )}
   </View>
 );
 
 const styles = StyleSheet.create({
+  MainContainer: {
+    marginVertical: 8
+  },
   ItemContainer: {
     marginHorizontal: 8,
-    marginVertical: 4,
-    padding: 16,
+    padding: 12,
     backgroundColor: '#eef0f2',
-    borderRadius: 16
+    borderRadius: 12
+  },
+  title: {
+    fontWeight: 'bold'
+  },
+  dateContainer: {
+    marginHorizontal: 36,
+    marginVertical: 4,
+    flexDirection: 'row'
+  },
+  dateText: {
+    marginLeft: 8,
+    fontStyle: 'italic',
+    color: '#555'
   }
 });
 
