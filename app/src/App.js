@@ -17,6 +17,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux';
 import messaging from '@react-native-firebase/messaging';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 enableScreens();
 
@@ -55,10 +56,42 @@ const App: () => React$Node = () => {
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
           <Tab.Navigator>
-            <Tab.Screen name="Notices" component={Notices} />
-            <Tab.Screen name="News" component={LearnMoreLinks} />
-            <Tab.Screen name="Tenders" component={LearnMoreLinks} />
-            <Tab.Screen name="Happenings" component={LearnMoreLinks} />
+            <Tab.Screen
+              name="Notices"
+              component={Notices}
+              options={{
+                tabBarIcon: ({ color }) => (
+                  <Icon name="notification" color={color} size={26} />
+                )
+              }}
+            />
+            <Tab.Screen
+              name="News"
+              component={LearnMoreLinks}
+              options={{
+                tabBarIcon: ({ color }) => (
+                  <Icon name="copy1" color={color} size={26} />
+                )
+              }}
+            />
+            <Tab.Screen
+              name="Tenders"
+              component={LearnMoreLinks}
+              options={{
+                tabBarIcon: ({ color }) => (
+                  <Icon name="book" color={color} size={26} />
+                )
+              }}
+            />
+            <Tab.Screen
+              name="Happenings"
+              component={LearnMoreLinks}
+              options={{
+                tabBarIcon: ({ color }) => (
+                  <Icon name="rocket1" color={color} size={26} />
+                )
+              }}
+            />
           </Tab.Navigator>
         </NavigationContainer>
       </PersistGate>
