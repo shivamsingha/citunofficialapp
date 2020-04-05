@@ -46,7 +46,8 @@ const ListItem = ({
 
 const styles = StyleSheet.create({
   MainContainer: {
-    marginVertical: 8
+    marginVertical: 8,
+    backgroundColor: '#fff'
   },
   ItemContainer: {
     marginHorizontal: 8,

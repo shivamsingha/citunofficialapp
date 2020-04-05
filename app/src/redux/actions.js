@@ -18,6 +18,7 @@ export const fetchData = (url = apiEndpoint) => async dispatch => {
       }
     });
   } catch (e) {
+    console.log('fetchData Action error', e);
     dispatch({
       type: FETCH_ERROR,
       payload: {

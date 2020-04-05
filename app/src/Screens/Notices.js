@@ -50,7 +50,7 @@ class Notices extends Component {
     });
 
   render() {
-    const { fetchStatus, data } = this.props;
+    const { data } = this.props;
     const { scrollY } = this.state;
     return (
       <>
@@ -88,7 +88,7 @@ class Notices extends Component {
                 { transform: [{ translateY: relativeHeight(30) }] }
               ]}>
               {data &&
-                data.notices.map(obj => (
+                data.map(obj => (
                   <ListItem
                     key={obj.link}
                     link={obj.link}
@@ -124,6 +124,6 @@ const styles = StyleSheet.create({
 });
 
 export default connect(
-  state => ({ ...state.fetchedData }),
+  state => ({ data: state.fetchedData.data.notices }),
   { fetchData }
 )(Notices);

@@ -9,7 +9,6 @@
 import 'react-native-gesture-handler';
 
 import React, { useEffect } from 'react';
-import { LearnMoreLinks } from 'react-native/Libraries/NewAppScreen';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { enableScreens } from 'react-native-screens';
@@ -21,7 +20,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import messaging from '@react-native-firebase/messaging';
 
-import { Notices } from './Screens';
+import { Notices, News, Tenders, Happenings } from './Screens';
 import { store, persistor } from './redux';
 
 enableScreens();
@@ -60,11 +59,12 @@ const App: () => React$Node = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
-          <Tab.Navigator>
+          <Tab.Navigator shifting={true}>
             <Tab.Screen
               name="Notices"
               component={Notices}
               options={{
+                tabBarColor: '#2650a5',
                 tabBarIcon: ({ color }) => (
                   <Icon name="notification" color={color} size={26} />
                 )
@@ -72,8 +72,9 @@ const App: () => React$Node = () => {
             />
             <Tab.Screen
               name="News"
-              component={LearnMoreLinks}
+              component={News}
               options={{
+                tabBarColor: '#38c172',
                 tabBarIcon: ({ color }) => (
                   <Icon name="copy1" color={color} size={26} />
                 )
@@ -81,8 +82,9 @@ const App: () => React$Node = () => {
             />
             <Tab.Screen
               name="Tenders"
-              component={LearnMoreLinks}
+              component={Tenders}
               options={{
+                tabBarColor: '#ef5753',
                 tabBarIcon: ({ color }) => (
                   <Icon name="book" color={color} size={26} />
                 )
@@ -90,8 +92,9 @@ const App: () => React$Node = () => {
             />
             <Tab.Screen
               name="Happenings"
-              component={LearnMoreLinks}
+              component={Happenings}
               options={{
+                tabBarColor: '#9561e2',
                 tabBarIcon: ({ color }) => (
                   <Icon name="rocket1" color={color} size={26} />
                 )

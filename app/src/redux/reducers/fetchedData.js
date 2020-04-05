@@ -3,6 +3,12 @@ import { FETCHING, FETCH_SUCCESS, FETCH_ERROR } from '../actionTypes';
 const initialState = {
   fetchStatus: {
     isFetching: false
+  },
+  data: {
+    notices: [],
+    newsevents: [],
+    happenings: [],
+    topinfo: []
   }
 };
 
