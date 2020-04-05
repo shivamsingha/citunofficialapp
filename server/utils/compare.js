@@ -12,31 +12,42 @@ async function compare() {
     };
   try {
     newResult = await scraper();
+    const newResultString = JSON.stringify(newResult);
     try {
       oldResult = await fs.readFile(filePath, { flag: 'a+' });
-      oldResult = JSON.parse(oldResult.toString());
-      const oldResultString = JSON.stringify(oldResult);
-      const newResultString = JSON.stringify(newResult);
-      if (oldResultString != newResultString) {
+      try {
+        oldResult = JSON.parse(oldResult.toString());
+        const oldResultString = JSON.stringify(oldResult);
+        if (oldResultString != newResultString) {
+          changeStatus.wasChanged = true;
+          changeStatus.diff = diff(newResult, oldResult);
+          console.log('result changed. writing to json file');
+          try {
+            await fs.writeFile(filePath, newResultString);
+          } catch (e) {
+            console('fs.writeFile error');
+            console.log(e);
+          }
+        } else {
+          console.log('result unchanged.');
+        }
+      } catch (e) {
+        console.log('JSON parse error', e);
         changeStatus.wasChanged = true;
-        changeStatus.diff = diff(newResult, oldResult);
-        console.log('result changed. writing to json file');
+        changeStatus.diff = newResult;
+        console.log('file corrupt? writing to json file');
         try {
           await fs.writeFile(filePath, newResultString);
         } catch (e) {
           console('fs.writeFile error');
           console.log(e);
         }
-      } else {
-        console.log('result unchanged.');
       }
     } catch (e) {
-      console.log('fs.readFile error');
-      console.log(e);
+      console.log('fs.readFile error', e);
     }
   } catch (e) {
-    console.log('Scraper Error');
-    console.log(e);
+    console.log('Scraper Error', e);
   }
   return changeStatus;
 }

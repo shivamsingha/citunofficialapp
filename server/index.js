@@ -16,6 +16,7 @@ compare().then((status) => {
       },
       topic: topic
     };
+
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
       databaseURL: 'https://citunofficial.firebaseio.com'
