@@ -36,6 +36,7 @@ jobs:
     - name: Push to remote git
       env:
         ADDRESS: ${{ secrets.address }}
+        GIT_SSH_COMMAND: "ssh -i $HOME/.ssh/id_rsa"
       run: |
         git remote add deploy "$ADDRESS"
         git push deploy
