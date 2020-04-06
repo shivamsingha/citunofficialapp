@@ -22,11 +22,13 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: ssh deploy
-      uses: easingthemes/ssh-deploy@master
       env:
         SSH_PRIVATE_KEY: ${{ secrets.KEY }}
         REMOTE_HOST: ${{ secrets.hostname }}
         REMOTE_USER: ${{ secrets.user }}
         SOURCE: "server/"
         TARGET: "/home/REMOTE_USER/cit"
-        ARGS: "-rltgoDzvO"
+      run: |
+        echo "$KEY" > sshkey
+        sudo chmod 600 sshkey
+        rsync -azPve "ssh -i sshkey" SOURCE REMOTE_USER@REMOTE_HOST:TARGET
