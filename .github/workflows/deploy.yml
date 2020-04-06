@@ -26,9 +26,11 @@ jobs:
         KEY: ${{ secrets.KEY }}
         HOSTKEY:  ${{ secrets.known_hosts }}
       run: |
-        mkdir $HOME/.ssh
+        mkdir 
         echo "$KEY" > $HOME/.ssh/id_rsa
         echo "$HOSTKEY" > $HOME/.ssh/known_hosts
+        chmod 600 $HOME/.ssh
+        chmod 400 $HOME/.ssh/*
 
     # Runs a set of commands using the runners shell
     - name: Push to remote git
