@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 const scraper = require('./scraper');
-const diff = require('./diff');
+//const diff = require('./diff');
 
 const filePath = `${process.env.RESULT_PATH || process.cwd()}/result.json`;
 
@@ -20,8 +20,7 @@ async function compare() {
         const oldResultString = JSON.stringify(oldResult);
         if (oldResultString != newResultString) {
           changeStatus.wasChanged = true;
-          changeStatus.diff = diff(newResult, oldResult);
-          console.log('result changed. writing to json file');
+          changeStatus.diff = newResult;
           try {
             await fs.writeFile(filePath, newResultString);
           } catch (e) {
