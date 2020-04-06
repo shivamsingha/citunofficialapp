@@ -26,7 +26,7 @@ jobs:
         KEY: ${{ secrets.KEY }}
         HOSTKEY:  ${{ secrets.known_hosts }}
       run: |
-        mkdir 
+        mkdir $HOME/.ssh
         echo "$KEY" > $HOME/.ssh/id_rsa
         echo "$HOSTKEY" > $HOME/.ssh/known_hosts
         chmod 600 $HOME/.ssh
