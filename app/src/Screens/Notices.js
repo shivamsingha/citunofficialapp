@@ -85,7 +85,8 @@ class Notices extends Component {
             <View
               style={[
                 styles.body,
-                { transform: [{ translateY: relativeHeight(30) }] }
+                { transform: [{ translateY: relativeHeight(30) }] },
+                { paddingBottom: data ? 0 : 300 }
               ]}>
               {data &&
                 data.map(obj => (
@@ -111,11 +112,9 @@ const styles = StyleSheet.create({
     zIndex: 10
   },
   body: {
-    backgroundColor: 'rgba(255, 255, 255, 1.0)',
-    paddingBottom: 300
+    backgroundColor: 'rgba(255, 255, 255, 1.0)'
   },
   headerBackground: {
-    height: relativeHeight(30),
     width: '100%',
     alignSelf: 'center',
     zIndex: 200,
