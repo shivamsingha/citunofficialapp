@@ -21,22 +21,11 @@ jobs:
     - uses: actions/checkout@v2
 
     # Runs a single command using the runners shell
-    - name: ssh key
-      env: 
-        KEY: ${{ secrets.KEY }}
-        HOSTKEY:  ${{ secrets.known_hosts }}
-      run: |
-        mkdir $HOME/.ssh
-        echo "$KEY" > $HOME/.ssh/id_rsa
-        echo "$HOSTKEY" > $HOME/.ssh/known_hosts
-        sudo chmod 600 $HOME/.ssh
-        sudo chmod 400 $HOME/.ssh/*
-
-    # Runs a set of commands using the runners shell
-    - name: Push to remote git
+    - name: ssh deploy
+      uses: easingthemes/ssh-deploy@v2.0.9
       env:
-        ADDRESS: ${{ secrets.address }}
-        GIT_SSH_COMMAND: "ssh -i $HOME/.ssh/id_rsa"
-      run: |
-        git remote add deploy "$ADDRESS"
-        git push deploy
+        SSH_PRIVATE_KEY: ${{ secrets.KEY }}
+        REMOTE_HOST: ${{ secrets.hostname }}
+        REMOTE_USER: ${{ secrets.user }}
+        SOURCE: server/
+        TARGET: /home/REMOTE_USER/cit
