@@ -28,7 +28,12 @@ jobs:
         REMOTE_USER: ${{ secrets.user }}
         SOURCE: "server/"
         TARGET: "/home/REMOTE_USER/cit"
+        KNOWN_HOSTS: ${{ secrets.knownhosts }}
       run: |
+        mkdir -p $HOME/.ssh
+        echo "$KNOWN_HOSTS" > $HOME/.ssh/known_hosts
+        sudo chmod 600 $HOME/.ssh/known_hosts
+        sudo chmod 600 $HOME/.ssh
         echo "$KEY" > sshkey
         sudo chmod 600 sshkey
         rsync -azPve "ssh -i sshkey" $SOURCE $REMOTE_USER@$REMOTE_HOST:$TARGET
