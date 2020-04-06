@@ -31,4 +31,4 @@ jobs:
       run: |
         echo "$KEY" > sshkey
         sudo chmod 600 sshkey
-        rsync -azPve "ssh -i sshkey" SOURCE REMOTE_USER@REMOTE_HOST:TARGET
+        rsync -azPve "ssh -i sshkey" $SOURCE $REMOTE_USER@$REMOTE_HOST:$TARGET
