@@ -20,11 +20,17 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
+    - name: install openssh-client
+      run: sudo apt install openssh-client
+
     # Runs a single command using the runners shell
     - name: ssh key
       env: 
-        KEY: ${{secrets.KEY}}
-      run: echo "$KEY" > $HOME/.ssh/id_rsa
+        KEY: ${{ secrets.KEY }}
+        HOSTKEY:  ${{ secrets.known_hosts }}
+      run: |
+        echo "$KEY" > $HOME/.ssh/id_rsa
+        echo "$HOSTKEY" > $HOME/.ssh/known_hosts
 
     # Runs a set of commands using the runners shell
     - name: Push to remote git
