@@ -29,8 +29,8 @@ jobs:
         mkdir $HOME/.ssh
         echo "$KEY" > $HOME/.ssh/id_rsa
         echo "$HOSTKEY" > $HOME/.ssh/known_hosts
-        chmod 600 $HOME/.ssh
-        chmod 400 $HOME/.ssh/*
+        sudo chmod 600 $HOME/.ssh
+        sudo chmod 400 $HOME/.ssh/*
 
     # Runs a set of commands using the runners shell
     - name: Push to remote git
