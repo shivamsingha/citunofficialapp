@@ -20,15 +20,13 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    - name: install openssh-client
-      run: sudo apt install openssh-client
-
     # Runs a single command using the runners shell
     - name: ssh key
       env: 
         KEY: ${{ secrets.KEY }}
         HOSTKEY:  ${{ secrets.known_hosts }}
       run: |
+        mkdir $HOME/.ssh
         echo "$KEY" > $HOME/.ssh/id_rsa
         echo "$HOSTKEY" > $HOME/.ssh/known_hosts
 
