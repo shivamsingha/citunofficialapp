@@ -24,13 +24,11 @@ compare()
         credential: admin.credential.cert(serviceAccount),
         databaseURL: 'https://citunofficial.firebaseio.com'
       });
-
       admin
         .messaging()
         .send(message)
-        .then((res) => {
-          console.log('pushed notification ', res);
-        })
+        .then((res) => console.log('pushed notification ', res))
+        .then(() => process.exit(0))
         .catch((e) => console.log('push ERROR ', e));
     }
   })
