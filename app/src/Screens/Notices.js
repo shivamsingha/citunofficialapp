@@ -8,7 +8,14 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SafeAreaView, StyleSheet, View, StatusBar } from 'react-native';
+import {
+  Modal,
+  ActivityIndicator,
+  SafeAreaView,
+  StyleSheet,
+  View,
+  StatusBar
+} from 'react-native';
 import Animated from 'react-native-reanimated';
 import { ListItem } from '../Components';
 import { fetchData } from '../redux/actions';
@@ -56,6 +63,13 @@ class Notices extends Component {
       <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
+          <Modal animationType="fade" transparent={true} visible={!data.length}>
+            <ActivityIndicator
+              size={70}
+              style={styles.loading}
+              color="#2650a5"
+            />
+          </Modal>
           <Animated.Image
             source={require('../../assets/Logo.png')}
             resizeMode="contain"
@@ -106,10 +120,14 @@ class Notices extends Component {
 }
 
 const styles = StyleSheet.create({
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   scrollView: {
     backgroundColor: 'rgba(0, 0, 0, 0.0)',
-    width: 'auto',
-    zIndex: 10
+    width: 'auto'
   },
   body: {
     backgroundColor: 'rgba(255, 255, 255, 1.0)'
