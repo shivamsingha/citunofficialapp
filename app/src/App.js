@@ -22,7 +22,7 @@ import messaging from '@react-native-firebase/messaging';
 
 import { Happenings, News, Notices, Tenders } from './Screens';
 import { persistor, store } from './redux';
-import {fetchData} from './redux/actions'
+import { fetchData } from './redux/actions';
 
 enableScreens();
 
@@ -44,7 +44,7 @@ const App: () => React$Node = () => {
   }
 
   async function subscribeTopic() {
-    await messaging().subscribeToTopic('allDevices');
+    await messaging().subscribeToTopic('test');
   }
 
   useEffect(() => {

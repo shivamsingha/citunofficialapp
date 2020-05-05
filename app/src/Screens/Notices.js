@@ -90,7 +90,10 @@ class Notices extends Component {
             style={styles.scrollView}
             scrollEventThrottle={1}
             refreshControl={
-              <RefreshControl refreshing={fetchStatus} onRefresh={this.props.fetchData} />
+              <RefreshControl
+                refreshing={fetchStatus}
+                onRefresh={this.props.fetchData}
+              />
             }
             onScroll={Animated.event(
               [

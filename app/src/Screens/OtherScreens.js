@@ -53,7 +53,10 @@ class Notices extends Component {
             keyExtractor={this.keyExtractor}
             style={styles.body}
             refreshControl={
-              <RefreshControl refreshing={fetchStatus} onRefresh={this.props.fetchData} />
+              <RefreshControl
+                refreshing={fetchStatus}
+                onRefresh={this.props.fetchData}
+              />
             }
           />
           {/*<ScrollView
