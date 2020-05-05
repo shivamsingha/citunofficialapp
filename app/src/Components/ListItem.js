@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { View, Text, Linking, StyleSheet } from 'react-native';
+import { Linking, StyleSheet, Text, View } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import Icon from 'react-native-vector-icons/Octicons';
 

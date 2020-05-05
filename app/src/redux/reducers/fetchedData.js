@@ -1,4 +1,4 @@
-import { FETCHING, FETCH_SUCCESS, FETCH_ERROR } from '../actionTypes';
+import { FETCHING, FETCH_ERROR, FETCH_SUCCESS } from '../actionTypes';
 
 const initialState = {
   fetchStatus: {
@@ -41,7 +41,10 @@ export default (state = initialState, { type, payload }) => {
     default:
       return {
         ...initialState,
-        ...state
+        ...state,
+        fetchStatus: {
+          isFetching: false
+        }
       };
   }
 };

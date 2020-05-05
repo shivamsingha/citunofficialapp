@@ -9,12 +9,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Modal,
   ActivityIndicator,
+  Modal,
+  RefreshControl,
   SafeAreaView,
+  StatusBar,
   StyleSheet,
-  View,
-  StatusBar
+  View
 } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { ListItem } from '../Components';
@@ -57,7 +58,7 @@ class Notices extends Component {
     });
 
   render() {
-    const { data } = this.props;
+    const { fetchStatus, data } = this.props;
     const { scrollY } = this.state;
     return (
       <>
@@ -88,6 +89,9 @@ class Notices extends Component {
             contentInsetAdjustmentBehavior="automatic"
             style={styles.scrollView}
             scrollEventThrottle={1}
+            refreshControl={
+              <RefreshControl refreshing={fetchStatus} onRefresh={this.props.fetchData} />
+            }
             onScroll={Animated.event(
               [
                 {
@@ -141,6 +145,9 @@ const styles = StyleSheet.create({
 });
 
 export default connect(
-  state => ({ data: state.fetchedData.data.notices }),
+  state => ({
+    data: state.fetchedData.data.notices,
+    fetchStatus: state.fetchedData.fetchStatus.isFetching
+  }),
   { fetchData }
 )(Notices);

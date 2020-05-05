@@ -9,9 +9,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
+  RefreshControl,
   SafeAreaView,
-  StyleSheet,
   StatusBar,
+  StyleSheet,
   VirtualizedList
 } from 'react-native';
 
@@ -38,7 +39,7 @@ class Notices extends Component {
   keyExtractor = item => item.link;
 
   render() {
-    const { data } = this.props;
+    const { fetchStatus, data } = this.props;
     return (
       <>
         <StatusBar barStyle="dark-content" />
@@ -51,6 +52,9 @@ class Notices extends Component {
             getItemCount={this.getItemCount}
             keyExtractor={this.keyExtractor}
             style={styles.body}
+            refreshControl={
+              <RefreshControl refreshing={fetchStatus} onRefresh={this.props.fetchData} />
+            }
           />
           {/*<ScrollView
             contentInsetAdjustmentBehavior="automatic"
@@ -81,6 +85,9 @@ const styles = StyleSheet.create({
 });
 
 export default connect(
-  (state, ownProps) => ({ data: state.fetchedData.data[ownProps.tab] }),
+  (state, ownProps) => ({
+    data: state.fetchedData.data[ownProps.tab],
+    fetchStatus: state.fetchedData.fetchStatus.isFetching
+  }),
   { fetchData }
 )(Notices);
