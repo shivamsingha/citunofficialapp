@@ -18,6 +18,7 @@ import {
   View
 } from 'react-native';
 import Animated from 'react-native-reanimated';
+import analytics from '@react-native-firebase/analytics';
 import { ListItem } from '../Components';
 import { fetchData } from '../redux/actions';
 import { relativeHeight } from '../utils';
@@ -57,6 +58,11 @@ class Notices extends Component {
       extrapolate: Extrapolate.CLAMP
     });
 
+  refreshHandler = () => {
+    analytics().logEvent('refresh');
+    this.props.fetchData();
+  };
+
   render() {
     const { fetchStatus, data } = this.props;
     const { scrollY } = this.state;
@@ -92,7 +98,7 @@ class Notices extends Component {
             refreshControl={
               <RefreshControl
                 refreshing={fetchStatus}
-                onRefresh={this.props.fetchData}
+                onRefresh={this.refreshHandler}
               />
             }
             onScroll={Animated.event(

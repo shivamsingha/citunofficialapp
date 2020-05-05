@@ -4,6 +4,7 @@ import React from 'react';
 import { Linking, StyleSheet, Text, View } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import Icon from 'react-native-vector-icons/Octicons';
+import analytics from '@react-native-firebase/analytics';
 
 const dateString = (date: string): string => {
   const dateLocale = new Date(date);
@@ -24,25 +25,31 @@ const ListItem = ({
   link?: string,
   title: string,
   date?: string
-}): React$Node => (
-  <View style={styles.MainContainer}>
-    {link ? (
-      <Touchable
-        onPress={() => Linking.openURL(link)}
-        style={styles.ItemContainer}>
+}): React$Node => {
+  const onPressLink = () => {
+    analytics().logEvent('openedLink', {
+      Link: link
+    });
+    Linking.openURL(link);
+  };
+  return (
+    <View style={styles.MainContainer}>
+      {link ? (
+        <Touchable onPress={onPressLink} style={styles.ItemContainer}>
+          <ListItemContent title={title} date={date} />
+        </Touchable>
+      ) : (
         <ListItemContent title={title} date={date} />
-      </Touchable>
-    ) : (
-      <ListItemContent title={title} date={date} />
-    )}
-    {date && (
-      <View style={styles.dateContainer}>
-        <Icon name="calendar" size={18} color="#555" />
-        <Text style={styles.dateText}>{dateString(date)}</Text>
-      </View>
-    )}
-  </View>
-);
+      )}
+      {date && (
+        <View style={styles.dateContainer}>
+          <Icon name="calendar" size={18} color="#555" />
+          <Text style={styles.dateText}>{dateString(date)}</Text>
+        </View>
+      )}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   MainContainer: {

@@ -15,6 +15,7 @@ import {
   StyleSheet,
   VirtualizedList
 } from 'react-native';
+import analytics from '@react-native-firebase/analytics';
 
 import { ListItem } from '../Components';
 import { fetchData } from '../redux/actions';
@@ -25,7 +26,16 @@ class Notices extends Component {
   }
 
   componentDidMount() {
+    this._unsubscribe = this.props.navigation.addListener('focus', e =>
+      analytics().logEvent('tab', {
+        target: e.target
+      })
+    );
     this.props.fetchData();
+  }
+
+  componentWillUnmount() {
+    this._unsubscribe();
   }
 
   renderItem = ({ item }) => (
@@ -37,6 +47,11 @@ class Notices extends Component {
   getItem = (data, index) => ({ ...data[index] });
 
   keyExtractor = item => item.link;
+
+  refreshHandler = () => {
+    analytics().logEvent('refresh');
+    this.props.fetchData();
+  };
 
   render() {
     const { fetchStatus, data } = this.props;
@@ -55,7 +70,7 @@ class Notices extends Component {
             refreshControl={
               <RefreshControl
                 refreshing={fetchStatus}
-                onRefresh={this.props.fetchData}
+                onRefresh={this.refreshHandler}
               />
             }
           />
