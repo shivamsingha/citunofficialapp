@@ -1,16 +1,26 @@
-import { FETCHING, FETCH_SUCCESS, FETCH_ERROR } from './actionTypes';
+import perf from '@react-native-firebase/perf';
+import { FETCHING, FETCH_ERROR, FETCH_SUCCESS } from './actionTypes';
 
-const apiEndpoint =
-  process.env.APIENDPOINT || 'https://unofficialapp.shvm.tech/result.json';
-
-export const fetchData = (url = apiEndpoint) => async dispatch => {
+const apiURL = 'https://unofficialapp.shvm.tech/result.json';
+export const fetchData = () => async dispatch => {
   try {
     dispatch({
       type: FETCHING
     });
-    const response = await fetch('https://unofficialapp.shvm.tech/result.json');
+
+    const metric = await perf().newHttpMetric(apiURL, 'GET');
+    await metric.start();
+
+    const response = await fetch(apiURL);
+
+    metric.setHttpResponseCode(response.status);
+    metric.setResponseContentType(response.headers.get('Content-Type'));
+    metric.setResponsePayloadSize(response.headers.get('Content-Length'));
+    await metric.stop();
+    
     if (!response.ok) throw Error(`fetch error ${response.status}`);
     const data = await response.json();
+
     dispatch({
       type: FETCH_SUCCESS,
       payload: {

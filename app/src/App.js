@@ -20,8 +20,9 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import messaging from '@react-native-firebase/messaging';
 
-import { Notices, News, Tenders, Happenings } from './Screens';
-import { store, persistor } from './redux';
+import { Happenings, News, Notices, Tenders } from './Screens';
+import { persistor, store } from './redux';
+import {fetchData} from './redux/actions'
 
 enableScreens();
 
@@ -29,7 +30,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 const App: () => React$Node = () => {
   async function registerAppWithFCM() {
-    await messaging().registerForRemoteNotifications();
+    await messaging().registerDeviceForRemoteMessages();
   }
 
   async function requestPermission() {
@@ -52,6 +53,7 @@ const App: () => React$Node = () => {
     subscribeTopic();
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       console.log('FCM Message Data:', remoteMessage.data);
+      fetchData();
     });
   });
 
