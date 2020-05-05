@@ -44,7 +44,7 @@ const App: () => React$Node = () => {
   }
 
   async function subscribeTopic() {
-    await messaging().subscribeToTopic('test');
+    await messaging().subscribeToTopic('allDevices');
   }
 
   useEffect(() => {

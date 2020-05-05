@@ -3,7 +3,7 @@ const admin = require('firebase-admin');
 
 const serviceAccount = require(process.env.SERVICE_ACC_KEY ||
   './serviceAccountKey.json');
-const topic = 'test';
+const topic = 'allDevices';
 
 compare()
   .then((status) => {
